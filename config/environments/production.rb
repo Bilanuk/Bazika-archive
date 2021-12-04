@@ -1,6 +1,9 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
+  config.serve_static_assets = true
+  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
+  config.public_file_server.enabled=true
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.

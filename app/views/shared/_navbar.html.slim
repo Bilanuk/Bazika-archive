@@ -1,0 +1,17 @@
+.container.navbar.navbar-expand-lg.navbar-dark.bg-dark.rounded-3.mt-1
+  .container-fluid
+    = link_to "Bazika", root_path, class: "text-light text-decoration-none fw-bold display-6"
+    button.navbar-toggler aria-controls="navbarSupportedContent" aria-expanded="false" aria-label=("Toggle navigation") data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse" type="button"
+      span.navbar-toggler-icon
+    #navbarSupportedContent.collapse.navbar-collapse
+      ul.navbar-nav.me-auto.mb-2.mb-lg-0
+        li.nav-item
+          / a.nav-link.active aria-current="page" href="#"  Home
+
+      .d-flex.align-items-center
+        - unless user_signed_in?
+          = link_to "Log in", new_user_session_path, class: "m-2 text-light text-decoration-none fw-bold"
+          = link_to "Sign up", new_user_registration_path, class: "btn btn-outline-light fw-bold"
+        - else
+          .text-light.fw-bold.m-2 = current_user.email
+          = button_to "Sign out", destroy_user_session_path, class: "btn btn-outline-light fw-bold",  method: :delete

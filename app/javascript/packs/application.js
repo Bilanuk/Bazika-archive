@@ -3,15 +3,20 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 
+//= require popper
+//= require bootstrap-sprockets
+
 import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
-import "bootstrap/dist/js/bootstrap"
-import "bootstrap/dist/css/bootstrap"
+import 'bootstrap'
 
-import "stylesheets/application"
+// import "bootstrap/dist/js/bootstrap"
+// import "bootstrap/dist/css/bootstrap"
+
+// import "../../assets/stylesheets/application.scss"
 
 Rails.start()
 Turbolinks.start()

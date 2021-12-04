@@ -1,0 +1,12 @@
+@import 'bootstrap';
+@import 'colors';
+@import 'shared';
+@import 'navbar';
+@import "device_form";
+
+body {
+  background-color: gray;
+}
+.bg-dimgray {
+  background-color: $dimgray;
+}
