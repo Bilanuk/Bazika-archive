@@ -1,6 +1,7 @@
-.alert-body
-  .alert-warnings
-    - flash.each do |key, message|
-      div class=("alert #{flash_class(key)} alert-dismissible fade show") role="alert"
-        = message
-        button.btn-close aria-label="Close" data-bs-dismiss="alert" type="button"
+-if flash.present?
+  .alert-body
+    .alert-warnings
+      - flash.each do |key, message|
+        div class=("alert #{flash_class(key)} alert-dismissible fade show") role="alert"
+          = message
+          button.btn-close aria-label="Close" data-bs-dismiss="alert" type="button"

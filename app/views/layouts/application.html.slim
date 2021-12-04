@@ -6,14 +6,14 @@ html
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+    / script src="jquery-3.5.1.min.js"
     / = stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload'
 
+
   body.bg-dimgray
+
     = render 'shared/navbar'
-    - if notice
-      p.alert.alert-success= notice
-    - if alert
-      |
-      p.alert.alert-danger= alert
+    = render 'shared/alert'
+
     .container
       = yield
