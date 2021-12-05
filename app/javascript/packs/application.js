@@ -13,7 +13,7 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import 'bootstrap'
-
+import "@fortawesome/fontawesome-free/js/all";
 // import "bootstrap/dist/js/bootstrap"
 // import "bootstrap/dist/css/bootstrap"
 
