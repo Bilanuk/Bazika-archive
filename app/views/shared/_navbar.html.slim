@@ -1,4 +1,4 @@
-.container.navbar.navbar-expand-lg.navbar-dark.bg-dark.rounded-3.mt-1
+.container.navbar.navbar-expand-lg.navbar-dark.bg-dark.rounded-custom.mt-1
   .container-fluid
     = link_to "Bazika", root_path, class: "text-light text-decoration-none fw-bold display-6"
     button.navbar-toggler aria-controls="navbarSupportedContent" aria-expanded="false" aria-label=("Toggle navigation") data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse" type="button"
@@ -7,7 +7,7 @@
       ul.navbar-nav.me-auto.mb-2.mb-lg-0
         li.nav-item.ml-2
           = link_to icon('fas', 'fas fa-search fa-lg'), root_path, class: "mx-1 navbar_icon"
-          = link_to "Search manga", root_path, class: "text-light text-decoration-none fw-bold navbar_search_text"
+          = link_to "Search", root_path, class: "text-light text-decoration-none fw-bold navbar_search_text"
 
 
       .d-flex.align-items-center

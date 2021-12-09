@@ -1,3 +1,5 @@
 class HomeController < ApplicationController
-  def index; end
+  def index
+    @response = AnilistApi.anime("Evangelion")
+  end
 end

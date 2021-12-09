@@ -9,12 +9,10 @@
 .box_sign-in, .box_sign-up {
   width: 400px;
   padding: 25px 30px 10px 30px;
-  border-radius: 15px;
+  border-radius: 1em;
   background-color: $dark;
   text-align: center;
   color: #fff;
-  box-shadow: 10px 10px 20px #000;
-
 
   input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px $dark inset;
@@ -55,12 +53,12 @@
     background: $dark;
     display: block;
     margin: 8px auto;
-    border: 1.5px solid #3498db;
+    border: 1.5px solid #ffffff;
     padding: 8px 10px;
     width: 290px;
     outline: none;
     color: #fff;
-    border-radius: 24px;
+    border-radius: 1em;
     align-items: center;
     text-align: center;
     font-size: 18px;
@@ -74,7 +72,7 @@
 
     &:focus {
       width: 330px;
-      border: 1.5px solid #2ecc71;
+      border: 1.5px solid #ffffff;
 
       @media (max-width: 500px) {
         width: 270px;
@@ -88,37 +86,35 @@
     display: block;
     margin: 16px auto;
     text-align:  center;
-    border: 2px solid #2ecc71;
+    border: 2px solid white;
     padding: 8px 34px;
     outline: none;
     color: white;
-    border-radius: 24px;
+    border-radius: 1em;
     transition: 0.25s;
     cursor: pointer;
+    font-weight: bold;
 
     &:hover {
-      background: #2ecc71;
+      background: white;
+      color: black !important;
+      -webkit-text-fill-color: #000000 !important;
     }
   }
 
   a {
     border: 0;
     background: none;
-    display: block;
-    margin: 0 auto;
-    text-align:  center;
-    border: 1px solid #3498db;
-    padding: 4px;
+    text-align: center;
+    padding: 10px;
     outline: none;
     color: white;
-    border-radius: 24px;
+    border-radius: 1em;
     transition: 0.25s;
     cursor: pointer;
     text-decoration: none;
-
-    &:hover {
-      border-color: #2ecc71;
-    }
+    margin-bottom: 5px;
+    width: 118px;
   }
 }
 
@@ -147,7 +143,7 @@
 
     &:focus {
       width: 330px;
-      border: 1.5px solid #2ecc71;
+      border: 1.5px solid #ffffff;
 
       @media (max-width: 500px) {
         width: 270px;
