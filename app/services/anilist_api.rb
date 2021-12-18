@@ -12,15 +12,27 @@ class AnilistApi
 
       request = Net::HTTP::Post.new(url)
       request['content-type'] = 'application/json'
-      request['x-rapidapi-host'] = 'anilist-graphql.p.rapidapi.com'
-      request['x-rapidapi-key'] = '095e732524mshd74be2bf3d5f145p1501cfjsn7477df35af0a'
+      request['x-rapidapi-host'] = Rails.application.credentials.AniList_host
+      request['x-rapidapi-key'] = Rails.application.credentials.AniList_key
       request.body = "{\"query\":\"query {\
-        Media (search: \\\"#{search}\\\", type: ANIME) {\
-              title {\
-                english\
-              }\
-            }\
-          }\"}"
+      Page (page: 1, perPage: 10) {\
+        media (search: \\\"Attack on titan\\\") {\
+        title {\
+          english\
+          native\
+        }\
+        description\
+        bannerImage\
+        coverImage {\
+          extraLarge\
+          large\
+          medium\
+          color\
+        }\
+        }\
+        }\
+      }\
+    \"}"
 
       response = ActiveSupport::JSON.decode(http.request(request).body)
     end

@@ -1,4 +1,12 @@
 -require 'json'
 h1 Hello world
-= @response["data"]["Media"]["title"]["english"]
+- @response['data']['Page']['media'].each do |card|
+    .card1
+        .description
+            h5 = card['title']['english']
+            p = card['description'].gsub(/<br\s*\/?>|<i\s*\/?>/, '')
+        .image_cover
+            img src=card['coverImage']['extraLarge']
+
+h5 = @response
 / {"data":{"Media":{"title":{"english":"Neon Genesis Evangelion: Death & Rebirth"}}}}

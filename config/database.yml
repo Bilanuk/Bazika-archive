@@ -9,12 +9,12 @@ default: &default
 
 development:
   <<: *default
-  database: <%= ENV['POSTGRES_DB_DEVELOPMENT'] %>
+  database: <%= ENV['BAZIKA_DB_DEVELOPMENT'] %>
 
 test:
   <<: *default
-  database: <%= ENV['POSTGRES_DB_TEST'] %>
+  database: <%= ENV['BAZIKA_DB_DEVELOPMENT'] %>
 
 production:
   <<: *default
-  database: <%= ENV['POSTGRES_DB_PRODUCTION'] %>
+  database: <%= ENV['BAZIKA_DB_DEVELOPMENT'] %>
