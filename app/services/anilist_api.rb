@@ -4,7 +4,6 @@ class AnilistApi
     require 'net/http'
     require 'openssl'
 
-    
     def anime(search)
       url = URI('https://anilist-graphql.p.rapidapi.com/')
       http = Net::HTTP.new(url.host, url.port)
