@@ -2,7 +2,6 @@ class AnilistApi
   class << self
     require 'uri'
     require 'net/http'
-    
     require 'openssl'
 
     def anime(search)
