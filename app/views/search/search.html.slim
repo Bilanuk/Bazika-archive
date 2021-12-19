@@ -1,0 +1,22 @@
+.search_box
+    p.filter Filters:
+    = simple_form_for :search, url: search_path, method: :get do |f|
+        .form-inputs
+            = f.input :query, require: true, label: false, placeholder: 'Name of a title', class: 'search-input'
+            = f.submit 'Search', class: 'submit-button'
+- if !@response.nil?
+  - if @response.empty?
+        h5.search-results No titles found.
+  - else
+    - @response.each do |title|
+            .title
+                .image_cover
+                    img src=title['coverImage']['extraLarge']
+                .description
+                    - if title['title']['english'].nil?
+                        h5 Name is not aviable
+                    - else
+                        h5 = title['title']['english'] 
+                    p = title['description']&.gsub(/<br\s*\/?>|<i\s*\/?>|<\/i>/, '')
+
+

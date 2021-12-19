@@ -16,7 +16,7 @@ class AnilistApi
       request['x-rapidapi-key'] = Rails.application.credentials.AniList_key
       request.body = "{\"query\":\"query {\
       Page (page: 1, perPage: 10) {\
-        media (search: \\\"Attack on titan\\\") {\
+        media (search: \\\"#{search}\\\", type: ANIME, isAdult: false, sort: POPULARITY_DESC) {\
         title {\
           english\
           native\
