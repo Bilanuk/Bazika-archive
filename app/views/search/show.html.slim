@@ -1,0 +1,26 @@
+.show_wrapper
+    .banner_wrapper
+        - if @response['bannerImage'].present?
+            img src = @response['bannerImage'] 
+    .information_wrapper 
+        .information
+            h3 = @response['title']['english'].present? ? @response['title']['english'].truncate(50) : @response['title']['native'].present? ? @response['title']['native'] : 'No title aviable'
+            .item 
+                span 
+                    'Type: 
+                => @response['type']
+            .item 
+                span 
+                    'Status: 
+                => @response['status']
+            .item 
+                span
+                    'Year:
+                => @response['seasonYear']
+            .item 
+                span
+                    'Season:
+                => @response['season']
+        .cover_image
+            img src = @response['coverImage']['extraLarge']
+= @response
