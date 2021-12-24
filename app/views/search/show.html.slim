@@ -4,23 +4,32 @@
             img src = @response['bannerImage'] 
     .information_wrapper 
         .information
-            h3 = @response['title']['english'].present? ? @response['title']['english'].truncate(50) : @response['title']['native'].present? ? @response['title']['native'] : 'No title aviable'
-            .item 
-                span 
-                    'Type: 
-                => @response['type']
-            .item 
-                span 
-                    'Status: 
-                => @response['status']
-            .item 
-                span
-                    'Year:
-                => @response['seasonYear']
-            .item 
-                span
-                    'Season:
-                => @response['season']
+            .main_info
+                h3 = @response['title']['english'].present? ? @response['title']['english'].truncate(50) : @response['title']['native'].present? ? @response['title']['native'] : 'No title aviable'
+                .item 
+                    span 
+                        'Type: 
+                    => @response['type']
+                .item 
+                    span 
+                        'Status: 
+                    => @response['status']
+                .item 
+                    span
+                        'Year:
+                    => @response['seasonYear']
+                .item 
+                    span
+                        'Genres:
+                    - @response['genres'].each_with_index do |genre, index|
+                        = genre
+                        = ', ' unless index == @response['genres'].size - 1
+            
+            .description
+                h5 Description: 
+                => @response['description']&.gsub(/<br\s*\/?>|<i\s*\/?>|<\/i>/, '')
         .cover_image
+            p bruh
             img src = @response['coverImage']['extraLarge']
-= @response
+
+/ = @response

@@ -15,5 +15,5 @@
           = link_to "Log in", new_user_session_path, class: "m-2 text-light text-decoration-none fw-bold"
           = link_to "Sign up", new_user_registration_path, class: "btn btn-outline-light fw-bold"
         - else
-          .text-light.fw-bold.m-2 = current_user.email
+          = link_to  current_user.first_name.present? ? current_user.first_name : current_user.email, profile_path, class: "text-light fw-bold m-2" 
           = button_to "Sign out", destroy_user_session_path, class: "btn btn-outline-light fw-bold",  method: :delete

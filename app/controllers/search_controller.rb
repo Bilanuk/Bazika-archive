@@ -9,7 +9,7 @@ class SearchController < ApplicationController
         return if params.dig(:search, :query).nil?
 
         query = params.dig(:search, :query)
-        @response = Kaminari.paginate_array(AnilistApiService.anime(query)['data']['Page']['media']).page(params[:page]).per(10)
+        @response = Kaminari.paginate_array(AnilistApiService.anime(query)['data']['Page']['media']).page(params[:page]).per(9)
         # @response = AnilistApiService.anime(query)['data']['Page']['media']
     end
 end

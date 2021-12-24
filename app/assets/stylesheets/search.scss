@@ -55,6 +55,7 @@
     border-radius: 10px;
     color: white;
     position: relative;
+    transition: transform .4s;
 
     .type {
         position: absolute;
@@ -86,10 +87,15 @@
             width: 200px;
             border-radius: 10px;
             transition: transform .4s;
+        }
+    }
 
-            &:hover {
-                transform: scale(1.1);
-            }
+    &:hover {
+        // & {
+        //     transform: scale(1.04);
+        // }
+        img {
+            transform: scale(1.1);
         }
     }
 }
@@ -105,7 +111,7 @@
     display: inline-block;
     justify-content: space-evenly;
     color: #818181;
-    margin-bottom: 50px;
+    // margin-bottom: 50px;
     
     span {
         margin: 10px;
@@ -150,7 +156,15 @@
         justify-content: space-between;
 
         .information {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 100%;
             padding: 15px;
+
+            .description {
+                padding-bottom: 10%;
+            }
 
             .item {
                 h6 {
@@ -167,8 +181,9 @@
             justify-content: right;
 
             img {
-                height: auto;
-                width: 80%;
+                height: fit-content;
+                width: 100%;
+                position: relative;
                 border-radius: 10px;
                 transition: transform .4s;
     
@@ -176,7 +191,30 @@
                     transform: scale(1.04);
                 }
             }
+
+            p {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+            }
         }
     }
 }
 
+// .cover_image {
+//     width: 40%;
+//     display: flex;
+//     padding: 30px;
+//     justify-content: right;
+
+//     img {
+//         height: fit-content;
+//         width: 100%;
+//         position: relative;
+//         border-radius: 10px;
+//         transition: transform .4s;
+
+//         &:hover {
+//             transform: scale(1.04);
+//         }
+//     }
