@@ -1,3 +1,5 @@
 class ProfileController < ApplicationController
-    def index; end
+    def index
+        @titles = current_user.titles
+    end
 end

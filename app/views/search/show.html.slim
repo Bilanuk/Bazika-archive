@@ -28,8 +28,8 @@
             .description
                 h5 Description: 
                 => @response['description']&.gsub(/<br\s*\/?>|<i\s*\/?>|<\/i>/, '')
+            .favourites 
+                = link_to  "Add to favourites", add_to_favourites_path(title: { api_id: params[:id]  }), method: :post
         .cover_image
-            p bruh
             img src = @response['coverImage']['extraLarge']
-
 / = @response

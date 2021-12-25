@@ -3,7 +3,10 @@ Rails.application.routes.draw do
 
   get '/search', to: 'search#search'
   get '/show/:id', to: 'search#show', as: 'show'
+  post '/add_to_favourites', to: 'titles#create', as: 'add_to_favourites'
+
   get '/profile', to: 'profile#index'
+  
 
   root to: "home#index"
 end
