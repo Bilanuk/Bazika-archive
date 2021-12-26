@@ -2,12 +2,12 @@
     .banner_wrapper
         - if @response['bannerImage'].present?
             img src = @response['bannerImage'] 
-    .information_wrapper 
+    .information_wrapper
         .information
             .main_info
                 h3 = @response['title']['english'].present? ? @response['title']['english'].truncate(50) : @response['title']['native'].present? ? @response['title']['native'] : 'No title aviable'
                 .item 
-                    span 
+                    span
                         'Type: 
                     => @response['type']
                 .item 
@@ -28,15 +28,21 @@
             .description
                 h5 Description: 
                 => @response['description']&.gsub(/<br\s*\/?>|<i\s*\/?>|<\/i>/, '')
-            .favourites 
-                = link_to  "Add to favourites", add_to_favourites_path(title: { \
-                    api_id: params[:id], \
-                    name: @response['title']['english'].present? ? @response['title']['english'].truncate(50) : @response['title']['native'].present? ? @response['title']['native'] : 'No title aviable', \
-                    description: @response['description'], \
-                    genres: @response['genres'], \
-                    title_type: @response['type'], \
-                    coverImage: @response['coverImage'].values[0] \
-                    }), method: :post
         .cover_image
-            img src = @response['coverImage'].values[0]
-/ = @response
+            .image_wrapper
+                img src = @response['coverImage'].values[0]
+                - if @is_favourite
+                    .remove_from_favourites
+                        = link_to icon('fas', 'fas fa-heart fa-lg'), add_to_favourites_path(title: { \
+                        api_id: params[:id] \
+                        }), method: :post, class: "mx-1 navbar_icon"
+                - else 
+                    .add_to_favourites
+                        = link_to icon('far', 'far fa-heart fa-lg'), add_to_favourites_path(title: { \
+                        api_id: params[:id], \
+                        name: @response['title']['english'].present? ? @response['title']['english'].truncate(50) : @response['title']['native'].present? ? @response['title']['native'] : 'No title aviable', \
+                        description: @response['description'], \
+                        genres: @response['genres'], \
+                        title_type: @response['type'], \
+                        coverImage: @response['coverImage'].values[0] \
+                        }), method: :post, class: "mx-1 navbar_icon"
