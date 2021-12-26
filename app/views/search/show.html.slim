@@ -29,7 +29,14 @@
                 h5 Description: 
                 => @response['description']&.gsub(/<br\s*\/?>|<i\s*\/?>|<\/i>/, '')
             .favourites 
-                = link_to  "Add to favourites", add_to_favourites_path(title: { api_id: params[:id]  }), method: :post
+                = link_to  "Add to favourites", add_to_favourites_path(title: { \
+                    api_id: params[:id], \
+                    name: @response['title']['english'].present? ? @response['title']['english'].truncate(50) : @response['title']['native'].present? ? @response['title']['native'] : 'No title aviable', \
+                    description: @response['description'], \
+                    genres: @response['genres'], \
+                    title_type: @response['type'], \
+                    coverImage: @response['coverImage'].values[0] \
+                    }), method: :post
         .cover_image
-            img src = @response['coverImage']['extraLarge']
+            img src = @response['coverImage'].values[0]
 / = @response

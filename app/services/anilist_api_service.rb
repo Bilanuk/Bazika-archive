@@ -44,7 +44,7 @@ class AnilistApiService
         }\
       \"}"
 
-      response = ActiveSupport::JSON.decode(http.request(request).body)
+      response = ActiveSupport::JSON.decode(http.request(request).body)['data']['Page']['media']
     end
 
     def show(id)
@@ -80,7 +80,7 @@ class AnilistApiService
         }\
     }\"}"
 
-      response = ActiveSupport::JSON.decode(http.request(request).body)
+      response = ActiveSupport::JSON.decode(http.request(request).body)['data']['Media']
     end
   end
 end

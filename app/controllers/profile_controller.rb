@@ -1,5 +1,3 @@
 class ProfileController < ApplicationController
-    def index
-        @titles = current_user.titles
-    end
+    before_action :authenticate_user!
 end

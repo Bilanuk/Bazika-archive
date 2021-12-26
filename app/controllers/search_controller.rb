@@ -1,15 +1,12 @@
-class SearchController < ApplicationController
-    before_action :authenticate_user!
-
+class SearchController < ProfileController
     def show
-        @response = AnilistApiService.show(params[:id])['data']['Media']
+        @response = AnilistApiService.show(params[:id])
     end
 
     def search
         return if params.dig(:search, :query).nil?
 
         query = params.dig(:search, :query)
-        @response = Kaminari.paginate_array(AnilistApiService.anime(query)['data']['Page']['media']).page(params[:page]).per(9)
-        # @response = AnilistApiService.anime(query)['data']['Page']['media']
+        @response = Kaminari.paginate_array(AnilistApiService.anime(query)).page(params[:page]).per(9)
     end
 end

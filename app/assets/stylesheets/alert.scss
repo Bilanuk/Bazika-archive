@@ -15,11 +15,11 @@
 
   .alert-warnings {
     position: absolute;
-    right: 14px;
+    right: 50%;
     z-index: 300;
     max-width: 300px;
     @media(max-width: 1800px) {
-      top: 80px;
+      top: 14px;
     }
     @media(min-width: 1801px) {
       top: 14px;
