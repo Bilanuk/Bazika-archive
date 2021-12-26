@@ -4,7 +4,7 @@
         .form-inputs
             = f.input :query, require: true, label: false, placeholder: 'Name of a title', class: 'search-input'
             = f.submit 'Search', class: 'submit-button'
-- if !@response.nil?
+- if @response.present?
   - if @response.empty?
         h5.search-results No titles found.
   - else

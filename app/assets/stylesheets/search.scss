@@ -150,6 +150,11 @@
     .information_wrapper {
         display: flex;
         justify-content: space-between;
+        min-width: 0;
+
+        @media (max-width: 767px) {
+            flex-direction: column-reverse;
+        }
 
         .information {
             display: flex;
@@ -171,27 +176,73 @@
         }
 
         .cover_image {
-            width: 40%;
-            display: flex;
             padding: 30px;
-            justify-content: right;
+            min-width: 100px;
+            height: 100%;
 
-            img {
-                height: fit-content;
-                width: 100%;
+
+            @media (min-width: 768px) {
+                width: 40%;
+            }
+
+            .image_wrapper {
                 position: relative;
-                border-radius: 10px;
                 transition: transform .4s;
     
                 &:hover {
                     transform: scale(1.04);
                 }
-            }
 
-            p {
-                position: absolute;
-                top: 10px;
-                right: 10px;
+                img {
+                    border-radius: 10px;
+                    width: 100%;
+                }
+                
+                .add_to_favourites {
+                    width: 50px;
+                    height: 50px;
+                    position: absolute;
+                    top: 15px;
+                    right: 15px;
+
+                    svg {
+                        height: 50px;
+                        width: 50px;
+                        background-color: #33ff00;
+                        border: 3px solid white;
+                        border-radius: 10px;
+                        padding: 3px;
+                        filter: drop-shadow(2px 4px 6px black);
+                        transition: transform .4s;
+
+                        &:hover {
+                            transform: scale(1.1);
+                        }
+                    }
+                }
+
+                .remove_from_favourites {
+                    width: 50px;
+                    height: 50px;
+                    position: absolute;
+                    top: 15px;
+                    right: 15px;
+
+                    svg {
+                        height: 50px;
+                        width: 50px;
+                        background-color: red;
+                        border: 3px solid white;
+                        border-radius: 10px;
+                        padding: 3px;
+                        filter: drop-shadow(2px 4px 6px black);
+                        transition: transform .4s;
+
+                        &:hover {
+                            transform: scale(1.1);
+                        }
+                    }
+                }
             }
         }
     }

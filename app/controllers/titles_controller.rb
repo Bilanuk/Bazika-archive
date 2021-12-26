@@ -1,4 +1,4 @@
-class TitlesController < ApplicationController
+class TitlesController < ProfileController
     def create
         title = current_user.titles.build(title_params)
         
