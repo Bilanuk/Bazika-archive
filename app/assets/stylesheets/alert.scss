@@ -24,6 +24,11 @@
     @media(min-width: 1801px) {
       top: 14px;
     }
+
+    .alert-text {
+      max-width: fit-content;
+      margin: 0;
+    }
   }
 
   .alert:before {
@@ -44,17 +49,17 @@
   /*color alert*/
 
   .alert-info {
-    border: 1px solid rgba(6, 44, 241, 0.70);
-    background-color: rgba(7, 73, 149, 0.25);
-    box-shadow: 0px 0px 2px #0396ff;
-    color: #0396ff;
-    text-shadow: 1px 1px #043b8f;
+    border: 1px solid rgba(36, 241, 6, 0.46) !important;
+    background-color: rgba(7, 149, 66, 0.15) !important;
+    box-shadow: 0px 0px 2px #259c08 !important;
+    color: #0ad406 !important;
+    text-shadow: 1px 1px #00704f !important;
     transition: 0.5s;
     cursor: pointer;
   }
 
   .alert-info:hover {
-    background-color: rgba(7, 73, 149, 0.35);
+    background-color: rgba(7, 149, 66, 0.35) !important;
     transition: 0.5s;
   }
 

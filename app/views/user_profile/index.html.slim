@@ -1,4 +1,5 @@
-h2 = current_user.email
+.search_box
+    h3.m-3 = 'Favourites:'
 - @titles.each do |title|
             = link_to show_path(id: title.api_id), action: :get do
                 .title

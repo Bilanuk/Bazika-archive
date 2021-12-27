@@ -100,10 +100,40 @@ class AnilistApiService
           }\
           bannerImage\
         }\
-    }\"}"
+      }\"}"
 
       response = ActiveSupport::JSON.decode(http.request(request).body)['data']['Media']
     end
+
+    def most_popular
+      http = Net::HTTP.new(@@url.host, @@url.port)
+      http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      request = Net::HTTP::Post.new(@@url)
+      request['content-type'] = 'application/json'
+      request['x-rapidapi-host'] = Rails.application.credentials.AniList_host
+      request['x-rapidapi-key'] = Rails.application.credentials.AniList_key
+      request.body = "{\"query\":\"query {\
+        Page (page: 1, perPage: 100) {\
+          media (sort: POPULARITY_DESC, isAdult: false) {\
+            id\
+            title {\
+              english\
+              native\
+            }\
+            description\
+            type\
+            genres\
+            coverImage {\
+              extraLarge\
+              large\
+              medium\
+            }\
+          }\
+        }\
+      }\"}"
+
+      response = ActiveSupport::JSON.decode(http.request(request).body)['data']['Page']['media']
+    end
   end
 end
-# 20665

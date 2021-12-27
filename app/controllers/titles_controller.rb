@@ -8,7 +8,7 @@ class TitlesController < ProfileController
             @is_favourite = true
         elsif find_title.present?
             find_title.destroy
-            flash.now[:alert] = 'You removed this from favourites'
+            flash.now[:warning] = 'You removed this from favourites'
             @is_favourite = false
         else
             flash.now[:alert] = 'Something went wrong'
