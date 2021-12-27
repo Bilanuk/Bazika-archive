@@ -70,6 +70,28 @@ class AnilistApiService
           type\
           episodes\
           averageScore\
+          recommendations {\
+            edges {\
+              node {\
+                 mediaRecommendation {\
+                  id\
+                  title {\
+                    english\
+                    native\
+                  }\
+                  genres\
+                  description\
+                  type\
+                   coverImage {\
+                     extraLarge\
+                     large\
+                     medium\
+                     color\
+                   }\
+                 }\
+              }\
+            }\
+          }\
           coverImage {\
             extraLarge\
             large\
