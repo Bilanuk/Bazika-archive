@@ -1,20 +1,26 @@
 class TitlesController < ProfileController
     def create
         title = current_user.titles.build(title_params)
+        @is_favourite = false
         
         if title.save
-            flash[:notice] = 'Title saved to your favourites'
+            flash.now[:notice] = 'Title saved to your favourites'
+            @is_favourite = true
         elsif find_title.present?
             find_title.destroy
-            flash[:alert] = 'You removed this from favourites'
+            flash.now[:alert] = 'You removed this from favourites'
+            @is_favourite = false
         else
-            flash[:alert] = 'Something went wrong'
+            flash.now[:alert] = 'Something went wrong'
         end
 
-        redirect_to request.referrer
     end
 
     private
+
+    def is_favourite?
+        current_user.titles.exists?(api_id: title_params[:api_id])
+    end
 
     def find_title
         title ||= current_user.titles.find_by(api_id: title_params[:api_id])
