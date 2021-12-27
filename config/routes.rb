@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   post '/add_to_favourites', to: 'titles#create', as: 'add_to_favourites'
 
   get '/profile', to: 'user_profile#index'
+  get '/users', to: 'user_profile#users', as: 'index_users'
   
 
   root to: "home#index"

@@ -1,7 +1,8 @@
 class SearchController < ApplicationController
     def show
         @is_favourite = is_favourite? if current_user
-        @response = AnilistApiService.show(params[:id])
+        @response = information
+        @recommendations = Kaminari.paginate_array(information['recommendations']['edges']).page(params[:page]).per(5)
     end
 
     def search
@@ -12,6 +13,10 @@ class SearchController < ApplicationController
     end
 
     private
+
+    def information
+        @response ||= AnilistApiService.show(params[:id])
+    end
 
     def is_favourite?
         current_user.titles.exists?(api_id: params[:id])

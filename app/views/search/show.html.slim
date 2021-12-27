@@ -46,3 +46,24 @@
                         title_type: @response['type'], \
                         coverImage: @response['coverImage'].values[0] \
                         }), method: :post, class: "mx-1 navbar_icon"
+.show_wrapper.mt-2.mb-2.pt-2.pb-2
+    - if @recommendations.present?
+        - if @recommendations.empty?
+                h5.search-results No recommendations found.
+        - else
+            - @recommendations.each do |title|
+                    = link_to show_path(id: title['node']['mediaRecommendation']['id']), action: :get do
+                        .title
+                            - if title['node']['mediaRecommendation']['type'].present?
+                                h6.type = title['node']['mediaRecommendation']['type']
+                            .image_cover
+                                img src=title['node']['mediaRecommendation']['coverImage'].values[0]
+                            .description
+                                h4 = title['node']['mediaRecommendation']['title']['english'].present? ? title['node']['mediaRecommendation']['title']['english'].truncate(50) : title['node']['mediaRecommendation']['title']['native'].present? ? title['node']['mediaRecommendation']['title']['native'] : 'No title aviable'
+                                - if title['node']['mediaRecommendation']['genres'].present?
+                                    - title['node']['mediaRecommendation']['genres'].each do |genre|
+                                        p.d-inline-block.ml-2.mb-1.text-secondary = genre
+                                            
+                                p = title['node']['mediaRecommendation']['description']&.gsub(/<br\s*\/?>|<i\s*\/?>|<\/i>/, '')
+            .task-paginator-wrapper.mb-3
+                = paginate @recommendations, class: "task-paginator"
