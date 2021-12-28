@@ -6,6 +6,17 @@ class UserProfileController < ProfileController
     end
 
     def users
-        @users = User.all
+        @users = User.where.not(id: current_user.id)
+    end
+
+    def user
+        @titles = find_user.titles.reverse_order.page(params[:page]).per(5)
+        find_user
+    end
+
+    private
+
+    def find_user
+        @user ||= User.find_by(id: params[:id])
     end
 end

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   get '/profile', to: 'user_profile#index'
   get '/users', to: 'user_profile#users', as: 'index_users'
+  get '/user/:id', to: 'user_profile#user', as: 'show_user'
   
 
   root to: "home#index"
