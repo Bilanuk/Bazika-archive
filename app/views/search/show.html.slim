@@ -31,29 +31,17 @@
         .cover_image
             .image_wrapper
                 img src = @response['coverImage'].values[0]
-                - if @is_favourite == true
-                    .add_to_favourites
-                        = link_to icon('far', 'far fa-heart fa-lg', id: "toggle_icon"), add_to_favourites_path(title: { \
+                - if current_user
+                        = link_to icon('far', 'far fa-heart fa-lg', id: "fav_ico"), add_to_favourites_path(title: { \
                         api_id: params[:id], \
                         name: @response['title']['english'].present? ? @response['title']['english'].truncate(50) : @response['title']['native'].present? ? @response['title']['native'] : 'No title aviable', \
                         description: @response['description'], \
                         genres: @response['genres'], \
                         title_type: @response['type'], \
                         coverImage: @response['coverImage'].values[0] \
-                        }), method: :post, remote: true, class: "mx-1 navbar_icon"
-                - elsif @is_favourite == false
-                    .remove_from_favourites
-                        = link_to icon('far', 'far fa-heart fa-lg', id: "toggle_icon"), add_to_favourites_path(title: { \
-                        api_id: params[:id], \
-                        name: @response['title']['english'].present? ? @response['title']['english'].truncate(50) : @response['title']['native'].present? ? @response['title']['native'] : 'No title aviable', \
-                        description: @response['description'], \
-                        genres: @response['genres'], \
-                        title_type: @response['type'], \
-                        coverImage: @response['coverImage'].values[0] \
-                        }), method: :post, remote: true, class: "mx-1 navbar_icon"
+                        }), method: :post, remote: true, class: "mx-1 navbar_icon fav_ico"
                 - else 
-                    .remove_from_favourites
-                        = link_to icon('far', 'far fa-heart fa-lg', id: "toggle_icon"), new_user_session_path, method: :get, class: "mx-1 navbar_icon"
+                        = link_to icon('far', 'far fa-heart fa-lg'), new_user_session_path, method: :get, class: "mx-1 navbar_icon fav_ico"
 - if @recommendations.present?
     .show_wrapper.mt-2.mb-2.pt-1.pb-1
 
@@ -73,3 +61,10 @@
                             p = title['node']['mediaRecommendation']['description']&.gsub(/<br\s*\/?>|<i\s*\/?>|<\/i>/, '')
         .task-paginator-wrapper.mb-3
             = paginate @recommendations, class: "task-paginator"
+javascript: 
+    if ( #{@is_favourite} ) { 
+        document.querySelector('#fav_ico').style.backgroundColor = "lightgreen";
+    }
+    else {
+        document.querySelector('#fav_ico').style.backgroundColor = 'transperent';
+    }

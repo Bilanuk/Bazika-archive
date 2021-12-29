@@ -1,20 +1,19 @@
 class TitlesController < ProfileController
     def create
         title = current_user.titles.build(title_params)
-        @is_favourite = false
         
         if title.save
             flash.now[:notice] = 'Title saved to your favourites'
-            @is_favourite = true
         elsif find_title.present?
             find_title.destroy
             flash.now[:warning] = 'You removed this from favourites'
-            @is_favourite = false
         else
             flash.now[:alert] = 'Something went wrong'
         end
-
+        
+        @is_favourite = is_favourite?
     end
+
 
     private
 

@@ -3,9 +3,11 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 
+//= require_self
 //= require popper
 //= require bootstrap-sprockets
 //= require jquery
+//= require navbar
 //= require_tree .
 
 import Rails from "@rails/ujs"
