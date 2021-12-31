@@ -1,8 +1,1 @@
 document.getElementsByClassName('alert-body')[0].innerHTML = "<%= j render 'shared/alert' %>";
-
-if (<%= @is_favourite %> == true) {
-  document.querySelector('#fav_ico').style.backgroundColor = "lightgreen";
-}
-else {
-  document.querySelector('#fav_ico').style.backgroundColor = null;
-}

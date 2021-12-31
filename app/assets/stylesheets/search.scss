@@ -204,7 +204,7 @@
                     position: absolute;
                     top: 15px;
                     right: 15px;
-                    transition: all 0.2s ease 0.1s;
+                    transition: all 0.1s ease 0.1s;
 
                     svg {
                         height: 50px;
@@ -213,16 +213,17 @@
                         border-radius: 10px;
                         padding: 3px;
                         filter: drop-shadow(2px 4px 6px black);
-                        transition: transform .4s;
+                        transition: .05s;
 
                         &:hover {
                             transform: scale(1.1);
+                            transition: 0.1s;
+                        }
+                        &:active {
+                            transform: scale(0.9);
+                            transition: 0.05s ease-in-out 0.01s;
                         }
                     }
-                }
-
-                #fav_ico {
-                    transition: all 0.2s ease 0.1s;
                 }
             }
         }

@@ -3,6 +3,7 @@ class SearchController < ApplicationController
         @is_favourite = is_favourite? if current_user
         @response = information
         @recommendations = Kaminari.paginate_array(information['recommendations']['edges']).page(params[:page]).per(5)
+        gon.is_favourite = is_favourite?
     end
 
     def search
@@ -19,6 +20,6 @@ class SearchController < ApplicationController
     end
 
     def is_favourite?
-        current_user.titles.exists?(api_id: params[:id])
+        current_user.titles.exists?(api_id: params[:id]) if current_user
     end
 end

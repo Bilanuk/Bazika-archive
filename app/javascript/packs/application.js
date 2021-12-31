@@ -17,6 +17,8 @@ import "channels"
 import 'bootstrap'
 import "@fortawesome/fontawesome-free/js/all";
 
+require('./favourites')
+
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()

@@ -7,9 +7,11 @@ html
     = stylesheet_link_tag 'application', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     meta content="width=device-width, initial-scale=1.0" name="viewport"
+    meta content="no-cache" name="turbolinks-cache-control"
 
     
-  body.bg-dimgray
+  body.bg-dimgray data-action="#{controller.action_name}" data-controller="#{controller.controller_name}" 
+
 
     = render 'shared/navbar'
     = render 'shared/alert'
@@ -18,4 +20,3 @@ html
       = yield
 
     = any_login_here if defined?(AnyLogin)
-

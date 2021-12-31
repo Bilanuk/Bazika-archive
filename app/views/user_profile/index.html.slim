@@ -1,7 +1,7 @@
 .search_box
     h3.m-3 = 'Favourites:'
 - @titles.each do |title|
-            = link_to show_path(id: title.api_id), action: :get do
+            = link_to show_path(id: title.api_id), action: :get, data: { no_turbolink: true } do
                 .title
                     - if title.title_type.present?
                         h6.type = title.title_type

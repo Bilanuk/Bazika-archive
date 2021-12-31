@@ -2,6 +2,6 @@
   .alert-warnings
     -if flash.present?
           - flash.each do |key, message|
-            div class=("alert #{flash_class(key)} alert-dismissible fade show") role="alert"
+            div id='alert' class=("alert #{flash_class(key)} alert-dismissible fade show") role="alert"
               p.alert-text = message
               button.btn-close aria-label="Close" data-bs-dismiss="alert" type="button"
