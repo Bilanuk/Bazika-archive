@@ -8,7 +8,7 @@ class AnilistApiService
     @@api_key = ENV['ANILIST_KEY'].gsub("\n", "")
 
 
-    def anime(search)
+    def anime(search, page)
       http = Net::HTTP.new(@@url.host, @@url.port)
       http.use_ssl = true
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
@@ -17,8 +17,15 @@ class AnilistApiService
       request['x-rapidapi-host'] = @@api_host
       request['x-rapidapi-key'] = @@api_key
       request.body = "{\"query\":\"query {\
-        Page (page: 1, perPage: 150) {\
-          media (search: \\\"#{search}\\\", isAdult: false, sort: POPULARITY_DESC) {\
+        Page (page: #{page}, perPage: 10) {\
+          pageInfo {\
+            total\
+            perPage\
+            currentPage\
+            lastPage\
+            hasNextPage\
+        }\
+        media (search: \\\"#{search}\\\", isAdult: false, sort: POPULARITY_DESC) {\
           id\
           title {\
             english\
@@ -46,7 +53,7 @@ class AnilistApiService
         }\
       \"}"
 
-      response = ActiveSupport::JSON.decode(http.request(request).body)['data']['Page']['media']
+      response = ActiveSupport::JSON.decode(http.request(request).body)['data']['Page']
     end
 
     def show(id)
@@ -107,7 +114,7 @@ class AnilistApiService
       response = ActiveSupport::JSON.decode(http.request(request).body)['data']['Media']
     end
 
-    def most_popular
+    def most_popular(page)
       http = Net::HTTP.new(@@url.host, @@url.port)
       http.use_ssl = true
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
@@ -116,7 +123,14 @@ class AnilistApiService
       request['x-rapidapi-host'] = @@api_host
       request['x-rapidapi-key'] = @@api_key
       request.body = "{\"query\":\"query {\
-        Page (page: 1, perPage: 100) {\
+        Page (page: #{page}, perPage: 10) {\
+          pageInfo {\
+            total\
+            perPage\
+            currentPage\
+            lastPage\
+            hasNextPage\
+        }\
           media (sort: POPULARITY_DESC, isAdult: false) {\
             id\
             title {\
@@ -135,7 +149,7 @@ class AnilistApiService
         }\
       }\"}"
 
-      response = ActiveSupport::JSON.decode(http.request(request).body)['data']['Page']['media']
+      response = ActiveSupport::JSON.decode(http.request(request).body)['data']['Page']
     end
   end
 end

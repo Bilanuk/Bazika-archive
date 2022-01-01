@@ -8,15 +8,20 @@ class SearchController < ApplicationController
 
     def search
         return if params.dig(:search, :query).nil?
-
-        query = params.dig(:search, :query)
-        @response = Kaminari.paginate_array(AnilistApiService.anime(query)).page(params[:page]).per(9)
+        
+        @response = Kaminari.paginate_array(search_results['media'], total_count: search_results['pageInfo']['total'].to_i).page(params[:page]).per(10)
     end
 
     private
 
     def information
         @response ||= AnilistApiService.show(params[:id])
+    end
+
+    def search_results
+        query = params.dig(:search, :query)
+
+        @results ||= AnilistApiService.anime(query, params.fetch(:page, 1).to_i).presence
     end
 
     def is_favourite?

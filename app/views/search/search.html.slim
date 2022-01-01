@@ -4,12 +4,10 @@
         .form-inputs
             = f.input :query, require: true, label: false, placeholder: 'Name of a title', class: 'search-input'
             = f.submit 'Search', class: 'submit-button'
-- if @response.present?
-  - if @response.empty?
+- if @response&.empty?
+    - if @response.blank?
         h5.search-results No titles found.
-  - else
-        .task-paginator-wrapper.mt-3
-                    = paginate @response, class: "task-paginator"
+- if @response.present?
         - @response.each do |title|
                 = link_to show_path(id: title['id']), action: :get do
                     .title
@@ -26,4 +24,3 @@
                             p = title['description']&.gsub(/<br\s*\/?>|<i\s*\/?>|<\/i>/, '')
         .task-paginator-wrapper.mb-3
             = paginate @response, class: "task-paginator"
-/ p = @response
