@@ -18,6 +18,7 @@ import 'bootstrap'
 import "@fortawesome/fontawesome-free/js/all";
 
 require('./favourites')
+require('./turbolink_fixes')
 
 Rails.start()
 Turbolinks.start()

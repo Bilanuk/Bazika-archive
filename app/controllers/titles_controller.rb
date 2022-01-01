@@ -10,8 +10,8 @@ class TitlesController < ProfileController
         else
             flash.now[:alert] = 'Something went wrong'
         end
-
-        gon.is_favourite = is_favourite?
+        
+        @is_favourite = is_favourite?
     end
 
 

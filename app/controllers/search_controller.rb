@@ -3,7 +3,6 @@ class SearchController < ApplicationController
         @is_favourite = is_favourite? if current_user
         @response = information
         @recommendations = Kaminari.paginate_array(information['recommendations']['edges']).page(params[:page]).per(5)
-        gon.is_favourite = is_favourite?
     end
 
     def search
@@ -19,9 +18,7 @@ class SearchController < ApplicationController
     end
 
     def search_results
-        query = params.dig(:search, :query)
-
-        @results ||= AnilistApiService.anime(query, params.fetch(:page, 1).to_i).presence
+        @results ||= AnilistApiService.anime(params.dig(:search, :query), params.fetch(:page, 1).to_i).presence
     end
 
     def is_favourite?
