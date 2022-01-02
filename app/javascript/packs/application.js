@@ -6,7 +6,6 @@
 //= require_self
 //= require popper
 //= require bootstrap-sprockets
-//= require jquery
 //= require navbar
 //= require_tree .
 
@@ -17,8 +16,11 @@ import "channels"
 import 'bootstrap'
 import "@fortawesome/fontawesome-free/js/all";
 
+require('jquery-ui/ui/widgets/sortable')
+
 require('./favourites')
 require('./turbolink_fixes')
+require('./navbar')
 
 Rails.start()
 Turbolinks.start()

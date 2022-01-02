@@ -63,11 +63,11 @@
                             p = title['node']['mediaRecommendation']['description']&.gsub(/<br\s*\/?>|<i\s*\/?>|<\/i>/, '')
         .task-paginator-wrapper.mb-3
             = paginate @recommendations, class: "task-paginator"
-
-javascript: 
-    if ( #{@is_favourite} ) { 
-        document.getElementById("fav_ico").style.backgroundColor = 'rgba(51, 170, 51, .8)';
-    }
-    else {
-        document.getElementById("fav_ico").style.backgroundColor = null;
-    }
+- if current_user
+    javascript: 
+        if ( #{@is_favourite} ) { 
+            document.getElementById("fav_ico").style.backgroundColor = 'rgba(51, 170, 51, .8)';
+        }
+        else {
+            document.getElementById("fav_ico").style.backgroundColor = null;
+        }

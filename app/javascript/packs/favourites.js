@@ -32,4 +32,3 @@
 //         gon.is_favourite = true;
 //     }
 // }
-
