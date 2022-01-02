@@ -20,38 +20,12 @@ a {
   top: 1px;
   font-size: 17pt !important;
 }
+
 #navbar {
-  transition: all ease 1s;
-}
-
-.red {
-  background-color: red !important;
-}
-
-.green {
   position: fixed;
-  animation: 0.2s ease-out 0s 1 topAnimation;
+  transition: 0.5s;
+  z-index: 100;
   top: 0;
-  right: 0;
-  left: 0;
-  z-index: 1030;
-}
-
-@keyframes topAnimation {
-  0% {
-    transform: translateY(-100%);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-
-.fixed_top {
-  
-  position: fixed;
-  transition: ease-in-out 1s;
-  top: 0;
-  right: 0;
-  left: 0;
-  z-index: 1030;
+  left: 50%;
+  transform: translateX(-50%);
 }

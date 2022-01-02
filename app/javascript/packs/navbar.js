@@ -1,27 +1,53 @@
-document.addEventListener("turbolinks:load", function(){
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 70) {
-          $('#navbar').addClass('green', 2000);
-          navbar_height = document.querySelector('#navbar').offsetHeight;
-          document.body.style.paddingTop = navbar_height + 'px';
-        } else {
+$(document).one('turbolinks:load', function() {
+    var lastScrollTop;
+    var navbar = $('#navbar');
+    var timer = null;
 
-            $('#navbar').removeClass('green', 1000);
-            document.body.style.paddingTop = '0';
-        } 
+    $(window).on('scroll',function(){    
+        var scrollTop = $(window).scrollTop();
+
+        if(scrollTop > lastScrollTop && scrollTop > 70){
+            navbar.css("top", "-150px");
+        } else{
+            navbar.css("top", "0");
+        }
+
+        lastScrollTop = scrollTop; 
+
+        if(timer !== null) {
+            clearTimeout(timer);        
+        }
+        timer = setTimeout(function() {
+              if (scrollTop < 150) {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
+        }, 1100);
     });
-}); 
+});
 
-// window.addEventListener('scroll', function() {
-//     if (window.scrollY > 100) {
-//       $('#navbar').addClass('fixed-top', 1000);
-//       navbar_height = document.querySelector('#navbar').offsetHeight;
-//       document.body.style.paddingTop = navbar_height + 'px';
-//     } else {
-//         $('#navbar').removeClass('fixed-top', 1000);
-//         document.body.style.paddingTop = '0';
-//     } 
-// });
-// if (typeof jQuery.ui !== 'undefined') {
-//     console.log($.ui.version);
-// }
+// $(document).one('turbolinks:load', function() {
+//     var prev = 0;
+//     var $window = $(window);
+//     var nav = $('#navbar');
+//     var navbar_height = 70;
+
+//     $window.on('scroll', function(){
+//         var scrollTop = $window.scrollTop();
+
+//         if (window.scrollY > 85) {
+//             nav.removeClass('hide_nav');
+//             nav.addClass('fixed-top');
+//             nav.addClass('show_nav', scrollTop < prev);
+//             document.body.style.paddingTop = navbar_height+ 'px';
+//         } else if (window.scrollY < 75) {
+//             nav.addClass('hide_nav', scrollTop > prev);
+//             setTimeout(function(){
+//                 nav.removeClass('fixed-top');
+//                 nav.removeClass('show_nav');
+//                 document.body.style.paddingTop = '0';
+//             },200); 
+
+//         }
+//         prev = scrollTop;
+//     });
+// }); 

@@ -10,13 +10,13 @@ html
     - if content_for?(:head)
        = yield(:head)
     
-  body.bg-dimgray data-action="#{controller.action_name}" data-controller="#{controller.controller_name}" 
+  body.bg-dimgray
 
 
     = render 'shared/navbar'
     = render 'shared/alert'
 
-    .container.mt-3
+    .container.after_navbar
       = yield
 
     = any_login_here if defined?(AnyLogin)
