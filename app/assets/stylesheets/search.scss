@@ -217,6 +217,11 @@
                         text-align: center;
                         color: white;
                         text-decoration: none;
+                        transition: .2s ease-in-out;
+                    }
+
+                    .status_button_active {
+                        flex: 1.1;
                     }
                 }
                 

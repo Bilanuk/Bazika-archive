@@ -12,7 +12,7 @@ class TitlesController < ProfileController
             flash.now[:notice] = 'Title saved to your favourites' if title.save
         end
 
-        @is_favourite = is_favourite?
+        @is_favourite = title.favourite
     end
 
     def set_status
@@ -40,10 +40,6 @@ class TitlesController < ProfileController
 
 
     private
-
-    # def is_status?
-    #     current_user.titles.where(api_id: title_params[:api_id],).exists?
-    # end
 
     def is_favourite?
         current_user.titles.where(api_id: title_params[:api_id], favourite: true).exists?
