@@ -1,0 +1,10 @@
+document.getElementsByClassName('alert-body')[0].innerHTML = "<%= j render 'shared/alert' %>";
+var status = '<%= @status %>';
+
+document.getElementById('watching').style.backgroundColor = null;
+document.getElementById('planning').style.backgroundColor = null;
+document.getElementById('watched').style.backgroundColor = null;
+
+
+var button = document.getElementById(status);
+button.style.backgroundColor = 'gray';

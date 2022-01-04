@@ -18,7 +18,7 @@ $(document).one('turbolinks:load', function() {
             clearTimeout(timer);        
         }
         timer = setTimeout(function() {
-              if (scrollTop < 150) {
+              if (scrollTop < 100) {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }
         }, 1100);

@@ -1,24 +1,52 @@
 class TitlesController < ProfileController
-    def create
-        title = current_user.titles.build(title_params)
-        
-        if title.save
-            flash.now[:notice] = 'Title saved to your favourites'
-        elsif find_title.present?
-            find_title.destroy
-            flash.now[:warning] = 'You removed this from favourites'
-        else
-            flash.now[:alert] = 'Something went wrong'
+    def create_favourite
+        title = find_title.presence
+        is_favourite = is_favourite?
+
+        if title.present? && is_favourite == false
+            flash.now[:notice] = 'Title saved to your favourites' if title.update_columns(favourite: true)
+        elsif title.present? && is_favourite == true
+            flash.now[:warning] = 'You removed this from favourites' if title.update_columns(favourite: false)
+        elsif title.nil?
+            title = current_user.titles.build(title_params)
+            flash.now[:notice] = 'Title saved to your favourites' if title.save
         end
-        
+
         @is_favourite = is_favourite?
+    end
+
+    def set_status
+        title = find_title.presence
+
+        if title.present?
+            if title.status != title_params[:status]
+                flash.now[:success] = "Title saved to your #{title_params[:status]}" 
+                title.update_columns(status: title_params[:status]) 
+            else
+                flash.now[:warning] = "Title removed from #{title_params[:status]}"
+                title.update_columns(status: nil)
+            end
+        else 
+            title = current_user.titles.build(title_params)
+            if title.save!
+                flash.now[:notice] = "Title saved to your #{title.status}" if title.save
+            else
+                flash.now[:warning] = 'Error'
+            end
+        end
+
+        @status = title.status
     end
 
 
     private
 
+    # def is_status?
+    #     current_user.titles.where(api_id: title_params[:api_id],).exists?
+    # end
+
     def is_favourite?
-        current_user.titles.exists?(api_id: title_params[:api_id])
+        current_user.titles.where(api_id: title_params[:api_id], favourite: true).exists?
     end
 
     def find_title
@@ -26,6 +54,6 @@ class TitlesController < ProfileController
     end
 
     def title_params
-        params.require(:title).permit(:api_id, :name, :description, :coverImage, :title_type, :genres => [])
+        params.require(:title).permit(:api_id, :name, :description, :coverImage, :title_type, :favourite, :status, :genres => [])
     end
 end
