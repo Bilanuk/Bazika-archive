@@ -37,11 +37,6 @@
                      = link_to icon('far', 'far fa-heart fa-lg', id: "fav_ico", data: {"turbolinks-temporary": ""}), add_to_favourites_path(title: { \
                     api_id: params[:id], \
                     favourite: true, \
-                    name: @response['title']['english'].present? ? @response['title']['english'].truncate(50) : @response['title']['native'].present? ? @response['title']['native'] : 'No title aviable', \
-                    description: @response['description'], \
-                    genres: @response['genres'], \
-                    title_type: @response['type'], \
-                    coverImage: @response['coverImage'].values[0] \
                     }), method: :post, remote: true, class: "mx-1 navbar_icon fav_ico"
                 - else 
                     = link_to icon('far', 'far fa-heart fa-lg'), new_user_session_path, method: :get, class: "mx-1 navbar_icon fav_ico"
@@ -49,31 +44,16 @@
                     = link_to 'Watching', add_status_path(title: { \
                     api_id: params[:id], \
                     status: 'watching', \
-                    name: @response['title']['english'].present? ? @response['title']['english'].truncate(50) : @response['title']['native'].present? ? @response['title']['native'] : 'No title aviable', \
-                    description: @response['description'], \
-                    genres: @response['genres'], \
-                    title_type: @response['type'], \
-                    coverImage: @response['coverImage'].values[0] \
                     }), remote: true, method: :post, id: "watching", class: "status_button"
 
                     = link_to 'Planning', add_status_path(title: { \
                     api_id: params[:id], \
                     status: 'planning', \
-                    name: @response['title']['english'].present? ? @response['title']['english'].truncate(50) : @response['title']['native'].present? ? @response['title']['native'] : 'No title aviable', \
-                    description: @response['description'], \
-                    genres: @response['genres'], \
-                    title_type: @response['type'], \
-                    coverImage: @response['coverImage'].values[0] \
                     }), remote: true, method: :post, id: "planning", class: "status_button"
 
                     = link_to 'Watched', add_status_path(title: { \
                     api_id: params[:id], \
                     status: 'watched', \
-                    name: @response['title']['english'].present? ? @response['title']['english'].truncate(50) : @response['title']['native'].present? ? @response['title']['native'] : 'No title aviable', \
-                    description: @response['description'], \
-                    genres: @response['genres'], \
-                    title_type: @response['type'], \
-                    coverImage: @response['coverImage'].values[0] \
                     }), remote: true, method: :post, id: "watched", class: "status_button"
         
 - if @recommendations.present?

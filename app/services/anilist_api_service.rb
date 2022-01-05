@@ -3,19 +3,19 @@ class AnilistApiService
     require 'uri'
     require 'net/http'
     require 'openssl'
-    @@url = URI('https://anilist-graphql.p.rapidapi.com/')
-    @@api_host = ENV['ANILIST_HOST'].gsub("\n", "")
-    @@api_key = ENV['ANILIST_KEY'].gsub("\n", "")
+    URL = URI('https://anilist-graphql.p.rapidapi.com/')
+    API_HOST = ENV['ANILIST_HOST'].gsub("\n", "")
+    API_KEY = ENV['ANILIST_KEY'].gsub("\n", "")
 
 
     def anime(search, page)
-      http = Net::HTTP.new(@@url.host, @@url.port)
+      http = Net::HTTP.new(URL.host, URL.port)
       http.use_ssl = true
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-      request = Net::HTTP::Post.new(@@url)
+      request = Net::HTTP::Post.new(URL)
       request['content-type'] = 'application/json'
-      request['x-rapidapi-host'] = @@api_host
-      request['x-rapidapi-key'] = @@api_key
+      request['x-rapidapi-host'] = API_HOST
+      request['x-rapidapi-key'] = API_KEY
       request.body = "{\"query\":\"query {\
         Page (page: #{page}, perPage: 10) {\
           pageInfo {\
@@ -57,14 +57,14 @@ class AnilistApiService
     end
 
     def show(id)
-      http = Net::HTTP.new(@@url.host, @@url.port)
+      http = Net::HTTP.new(URL.host, URL.port)
       http.use_ssl = true
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-      request = Net::HTTP::Post.new(@@url)
-      request = Net::HTTP::Post.new(@@url)
+      request = Net::HTTP::Post.new(URL)
+      request = Net::HTTP::Post.new(URL)
       request['content-type'] = 'application/json'
-      request['x-rapidapi-host'] = @@api_host
-      request['x-rapidapi-key'] = @@api_key
+      request['x-rapidapi-host'] = API_HOST
+      request['x-rapidapi-key'] = API_KEY
       request.body = "{\"query\":\"query {\
         Media (id: #{id}, isAdult: false) {\
           id\
@@ -115,13 +115,13 @@ class AnilistApiService
     end
 
     def most_popular(page)
-      http = Net::HTTP.new(@@url.host, @@url.port)
+      http = Net::HTTP.new(URL.host, URL.port)
       http.use_ssl = true
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-      request = Net::HTTP::Post.new(@@url)
+      request = Net::HTTP::Post.new(URL)
       request['content-type'] = 'application/json'
-      request['x-rapidapi-host'] = @@api_host
-      request['x-rapidapi-key'] = @@api_key
+      request['x-rapidapi-host'] = API_HOST
+      request['x-rapidapi-key'] = API_KEY
       request.body = "{\"query\":\"query {\
         Page (page: #{page}, perPage: 10) {\
           pageInfo {\
@@ -150,6 +150,35 @@ class AnilistApiService
       }\"}"
 
       response = ActiveSupport::JSON.decode(http.request(request).body)['data']['Page']
+    end
+
+    def save(id)
+      http = Net::HTTP.new(URL.host, URL.port)
+      http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      request = Net::HTTP::Post.new(URL)
+      request['content-type'] = 'application/json'
+      request['x-rapidapi-host'] = API_HOST
+      request['x-rapidapi-key'] = API_KEY
+      request.body = "{\"query\":\"query {\
+        Media (id: #{id}, isAdult: false) {\
+          id\
+          title {\
+            english\
+            native\
+          }\
+          description\
+          type\
+          genres\
+          coverImage {\
+            extraLarge\
+            large\
+            medium\
+          }\
+        }\
+      }\"}"
+
+      response = ActiveSupport::JSON.decode(http.request(request).body)['data']['Media']
     end
   end
 end

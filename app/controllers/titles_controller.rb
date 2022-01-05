@@ -8,7 +8,7 @@ class TitlesController < ProfileController
         elsif title.present? && is_favourite == true
             flash.now[:warning] = 'You removed this from favourites' if title.update_columns(favourite: false)
         elsif title.nil?
-            title = current_user.titles.build(title_params)
+            title = current_user.titles.build(get_info)
             flash.now[:notice] = 'Title saved to your favourites' if title.save
         end
 
@@ -27,7 +27,7 @@ class TitlesController < ProfileController
                 title.update_columns(status: nil)
             end
         else 
-            title = current_user.titles.build(title_params)
+            title = current_user.titles.build(get_info)
             if title.save!
                 flash.now[:notice] = "Title saved to your #{title.status}" if title.save
             else
@@ -49,7 +49,13 @@ class TitlesController < ProfileController
         title ||= current_user.titles.find_by(api_id: title_params[:api_id])
     end
 
+    def get_info
+        hash = AnilistApiService.save(title_params[:api_id]).merge(api_id: title_params[:api_id])
+        # hash[:api_id] = hash.delete(:id)
+        hash
+    end
+
     def title_params
-        params.require(:title).permit(:api_id, :name, :description, :coverImage, :title_type, :favourite, :status, :genres => [])
+        params.require(:title).permit(:api_id, :favourite, :status)
     end
 end
