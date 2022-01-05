@@ -152,7 +152,7 @@ class AnilistApiService
       response = ActiveSupport::JSON.decode(http.request(request).body)['data']['Page']
     end
 
-    def save(id)
+    def save(id, title_params)
       http = Net::HTTP.new(URL.host, URL.port)
       http.use_ssl = true
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
@@ -179,6 +179,13 @@ class AnilistApiService
       }\"}"
 
       response = ActiveSupport::JSON.decode(http.request(request).body)['data']['Media']
+      response[:api_id] = response.delete('id')
+      response[:title_type] = response.delete('type')
+      response[:name] = response.delete('title').values[0]
+      response[:coverImage] = response.delete('coverImage').values[0]
+      response[:favourite] = title_params[:favourite] if title_params[:favourite].present?
+      response[:status] = title_params[:status] if title_params[:status].present?
+      response
     end
   end
 end

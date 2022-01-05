@@ -7,7 +7,7 @@ $(document).one('turbolinks:load', function() {
         var scrollTop = $(window).scrollTop();
 
         if(scrollTop > lastScrollTop && scrollTop > 70){
-            navbar.css("top", "-150px");
+            navbar.css("top", "-170px");
         } else{
             navbar.css("top", "0");
         }
