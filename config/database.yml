@@ -17,4 +17,4 @@ test:
 
 production:
   <<: *default
-  database: <%= ENV['BAZIKA_DB_DEVELOPMENT'] %>
+  database: <%= ENV['BAZIKA_DB_PRODUCTION'] %>

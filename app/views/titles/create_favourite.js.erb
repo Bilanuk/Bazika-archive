@@ -1,0 +1,13 @@
+document.getElementsByClassName('alert-body')[0].innerHTML = "<%= j render 'shared/alert' %>";
+
+var button = document.querySelector('#fav_ico');
+toggle(button);
+
+function toggle(el) {
+    if (<%= @is_favourite %> == true) {
+        el.style.backgroundColor = 'rgba(51, 170, 51, .8)';
+    }
+    else {
+        el.style.backgroundColor = null;
+    }
+}

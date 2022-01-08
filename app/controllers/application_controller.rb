@@ -12,4 +12,8 @@ class ApplicationController < ActionController::Base
   def user_root_path
     profile_path
   end
+
+  def after_sign_in_path_for(resource)
+    session["user_return_to"] || root_path
+  end
 end

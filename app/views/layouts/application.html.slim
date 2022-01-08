@@ -7,15 +7,16 @@ html
     = stylesheet_link_tag 'application', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     meta content="width=device-width, initial-scale=1.0" name="viewport"
-
+    - if content_for?(:head)
+       = yield(:head)
     
   body.bg-dimgray
+
 
     = render 'shared/navbar'
     = render 'shared/alert'
 
-    .container.mt-3
+    .container.after_navbar
       = yield
 
     = any_login_here if defined?(AnyLogin)
-

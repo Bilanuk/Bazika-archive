@@ -1,3 +1,5 @@
+- content_for :head do
+    meta content="no-cache" name="turbolinks-cache-control"
 .show_wrapper
     .banner_wrapper
         - if @response['bannerImage'].present?
@@ -31,39 +33,58 @@
         .cover_image
             .image_wrapper
                 img src = @response['coverImage'].values[0]
-                - if @is_favourite
-                    .remove_from_favourites
-                        = link_to icon('far', 'far fa-heart fa-lg', id: "toggle_icon"), add_to_favourites_path(title: { \
-                        api_id: params[:id] \
-                        }), method: :post, remote: true, class: "mx-1 navbar_icon"
+                - if current_user
+                     = link_to icon('far', 'far fa-heart fa-lg', id: "fav_ico", data: {"turbolinks-temporary": ""}), add_to_favourites_path(title: { \
+                    api_id: params[:id], \
+                    favourite: true, \
+                    }), method: :post, remote: true, class: "mx-1 navbar_icon fav_ico"
                 - else 
-                    .add_to_favourites
-                        = link_to icon('far', 'far fa-heart fa-lg', id: "toggle_icon"), add_to_favourites_path(title: { \
-                        api_id: params[:id], \
-                        name: @response['title']['english'].present? ? @response['title']['english'].truncate(50) : @response['title']['native'].present? ? @response['title']['native'] : 'No title aviable', \
-                        description: @response['description'], \
-                        genres: @response['genres'], \
-                        title_type: @response['type'], \
-                        coverImage: @response['coverImage'].values[0] \
-                        }), method: :post, remote: true, class: "mx-1 navbar_icon"
-.show_wrapper.mt-2.mb-2.pt-2.pb-2
-    - if @recommendations.present?
-        - if @recommendations.empty?
-                h5.search-results No recommendations found.
-        - else
-            - @recommendations.each do |title|
-                    = link_to show_path(id: title['node']['mediaRecommendation']['id']), action: :get do
-                        .title
-                            - if title['node']['mediaRecommendation']['type'].present?
-                                h6.type = title['node']['mediaRecommendation']['type']
-                            .image_cover
-                                img src=title['node']['mediaRecommendation']['coverImage'].values[0]
-                            .description
-                                h4 = title['node']['mediaRecommendation']['title']['english'].present? ? title['node']['mediaRecommendation']['title']['english'].truncate(50) : title['node']['mediaRecommendation']['title']['native'].present? ? title['node']['mediaRecommendation']['title']['native'] : 'No title aviable'
-                                - if title['node']['mediaRecommendation']['genres'].present?
-                                    - title['node']['mediaRecommendation']['genres'].each do |genre|
-                                        p.d-inline-block.ml-2.mb-1.text-secondary = genre
+                    = link_to icon('far', 'far fa-heart fa-lg'), new_user_session_path, method: :get, class: "mx-1 navbar_icon fav_ico"
+                .status_bar
+                    = link_to 'Watching', add_status_path(title: { \
+                    api_id: params[:id], \
+                    status: 'watching', \
+                    }), remote: true, method: :post, id: "watching", class: "status_button"
+
+                    = link_to 'Planning', add_status_path(title: { \
+                    api_id: params[:id], \
+                    status: 'planning', \
+                    }), remote: true, method: :post, id: "planning", class: "status_button"
+
+                    = link_to 'Watched', add_status_path(title: { \
+                    api_id: params[:id], \
+                    status: 'watched', \
+                    }), remote: true, method: :post, id: "watched", class: "status_button"
+        
+- if @recommendations.present?
+    .show_wrapper.mt-2.mb-2.pt-1.pb-1
+        - @recommendations.each do |title|
+                = link_to show_path(id: title['node']['mediaRecommendation']['id']), action: :get do
+                    .title
+                        - if title['node']['mediaRecommendation']['type'].present?
+                            h6.type = title['node']['mediaRecommendation']['type']
+                        .image_cover
+                            img src=title['node']['mediaRecommendation']['coverImage'].values[0]
+                        .description
+                            h4 = title['node']['mediaRecommendation']['title']['english'].present? ? title['node']['mediaRecommendation']['title']['english'].truncate(50) : title['node']['mediaRecommendation']['title']['native'].present? ? title['node']['mediaRecommendation']['title']['native'] : 'No title aviable'
+                            - if title['node']['mediaRecommendation']['genres'].present?
+                                - title['node']['mediaRecommendation']['genres'].each do |genre|
+                                    p.d-inline-block.ml-2.mb-1.text-secondary = genre
                                             
-                                p = title['node']['mediaRecommendation']['description']&.gsub(/<br\s*\/?>|<i\s*\/?>|<\/i>/, '')
-            .task-paginator-wrapper.mb-3
-                = paginate @recommendations, class: "task-paginator"
+                            p = title['node']['mediaRecommendation']['description']&.gsub(/<br\s*\/?>|<i\s*\/?>|<\/i>/, '')
+        .task-paginator-wrapper.mb-3
+            = paginate @recommendations, class: "task-paginator"
+- if current_user
+    javascript: 
+        if ( #{@is_favourite} ) { 
+            document.getElementById("fav_ico").style.backgroundColor = 'rgba(51, 170, 51, .8)';
+        }
+        else {
+            document.getElementById("fav_ico").style.backgroundColor = null;
+        }
+        var status = '#{@status}';
+        if (status !== "") {
+            document.getElementById(status).style.backgroundColor = 'gray';
+        }
+
+

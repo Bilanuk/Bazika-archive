@@ -5,7 +5,7 @@ module ApplicationHelper
       "error" => "alert-danger",
       "notice" => "alert-info",
       "alert" => "alert-danger",
-      "warn" => "alert-warning"
+      "warning" => "alert-warning"
     }
     bootstrap_alert_class[level]
   end

@@ -1,8 +1,0 @@
-document.getElementsByClassName('alert-body')[0].innerHTML = "<%= j render 'shared/alert' %>";
-var button = document.querySelector('#toggle_icon');
-toggle(button)
-console.log(<%= @is_favourite %>)
-
-function toggle(el) {
-  el.style.backgroundColor = (<%= @is_favourite %> == true) ? 'red' : 'lightgreen';
-}

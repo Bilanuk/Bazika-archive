@@ -45,3 +45,4 @@ yarn-debug.log*
 
 /config/credentials/production.key
 .key
+/config/credentials/producton.key

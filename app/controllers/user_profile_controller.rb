@@ -1,21 +1,24 @@
-class UserProfileController < ProfileController
-    before_action :authenticate_user!
-
-    # def index
-    #     @titles = []
-
-    #     current_user.titles.each do |title|
-    #         @titles.prepend(AnilistApiService.show(title.api_id))
-    #     end
-
-    #     @titles = Kaminari.paginate_array(@titles).page(params[:page]).per(9)
-    # end
-
-    def index
-        @titles = current_user.titles.reverse_order.page(params[:page]).per(5)
-    end
-
+class UserProfileController < ProfileController    
     def users
         @users = User.all
+    end
+
+    def user
+        get_user
+        get_amount
+    end
+
+    private
+
+    def get_user
+        @user ||= User.find_by(id: params[:id])
+    end
+
+    def get_amount
+        @arr = []
+        Title.statuses.keys.each do |x|
+            @arr.append(get_user.titles.where(status: x).size)
+        end
+        @arr.prepend(get_user.titles.where(favourite: true).size)
     end
 end

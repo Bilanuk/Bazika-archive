@@ -1,4 +1,4 @@
-.container.navbar.navbar-expand-lg.navbar-dark.bg-dark.rounded-custom.mt-1
+#navbar(class="container navbar navbar-expand-lg navbar-dark bg-dark rounded-custom mt-1" data-turbolinks-permanent)
   .container-fluid
     = link_to "Bazika", root_path, class: "text-light text-decoration-none fw-bold display-6"
     button.navbar-toggler aria-controls="navbarSupportedContent" aria-expanded="false" aria-label=("Toggle navigation") data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse" type="button"
@@ -18,5 +18,20 @@
           = link_to "Log in", new_user_session_path, class: "m-2 text-light text-decoration-none fw-bold"
           = link_to "Sign up", new_user_registration_path, class: "btn btn-outline-light fw-bold"
         - else
-          = link_to  current_user.username.present? ? current_user.username : current_user.email, profile_path, class: "text-light fw-bold m-2" 
+          button.navbar-toggler aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label=("Toggle navigation") data-bs-target="#navbarNavDarkDropdown" data-bs-toggle="collapse" type="button" 
+              span.navbar-toggler-icon
+          #navbarNavDarkDropdown.collapse.navbar-collapse
+            ul.navbar-nav
+              li.nav-item.dropdown
+                a#navbarDarkDropdownMenuLink.nav-link.dropdown-toggle.text-light aria-expanded="false" data-bs-toggle="dropdown" href="#" role="button" 
+                  = current_user.username
+                ul.dropdown-menu.dropdown-menu-dark aria-labelledby="navbarDarkDropdownMenuLink" 
+                  li
+                    = link_to 'Favourites', favourites_path, class: "dropdown-item" 
+                  li
+                    = link_to 'Watching', watching_path, class: "dropdown-item" 
+                  li
+                    = link_to 'Planning', planning_path, class: "dropdown-item"
+                  li 
+                    = link_to 'Watched', watched_path, class: "dropdown-item"
           = button_to "Sign out", destroy_user_session_path, class: "btn btn-outline-light fw-bold",  method: :delete

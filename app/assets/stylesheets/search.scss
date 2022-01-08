@@ -69,7 +69,7 @@
 
         p {
             margin-top: 0;
-            margin-bottom: 1rem;
+            margin-bottom: 0;
             overflow: hidden;
             -webkit-box-orient: vertical;
             display: block;
@@ -164,7 +164,7 @@
             padding: 15px;
 
             .description {
-                padding-bottom: 10%;
+                padding-bottom: 15px;
             }
 
             .item {
@@ -194,52 +194,61 @@
                 }
 
                 img {
-                    border-radius: 10px;
+                    border-top-left-radius: 10px;
+                    border-top-right-radius: 10px;
                     width: 100%;
                 }
-                
-                .add_to_favourites {
-                    width: 50px;
-                    height: 50px;
-                    position: absolute;
-                    top: 15px;
-                    right: 15px;
 
-                    svg {
-                        height: 50px;
-                        width: 50px;
-                        background-color: lightgreen;
-                        border: 3px solid white;
-                        border-radius: 10px;
-                        padding: 3px;
-                        filter: drop-shadow(2px 4px 6px black);
-                        transition: transform .4s;
+                .status_bar {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: stretch;
+                    width: 100%;
+                    height: 30px;
+                    border-bottom-left-radius: 10px;
+                    border-bottom-right-radius: 10px;
+                    background-color: rgba(105, 105, 105, 0.6);
+                    z-index: -1;
+                    overflow: hidden;
 
-                        &:hover {
-                            transform: scale(1.1);
-                        }
+                    .status_button {
+                        padding-top: 3px;
+                        flex: 1;
+                        text-align: center;
+                        color: white;
+                        text-decoration: none;
+                        transition: .2s ease-in-out;
+                    }
+
+                    .status_button_active {
+                        flex: 1.1;
                     }
                 }
-
-                .remove_from_favourites {
+                
+                .fav_ico {
                     width: 50px;
                     height: 50px;
                     position: absolute;
                     top: 15px;
                     right: 15px;
+                    transition: all 0.1s ease 0.1s;
 
                     svg {
                         height: 50px;
                         width: 50px;
-                        background-color: red;
                         border: 3px solid white;
                         border-radius: 10px;
                         padding: 3px;
                         filter: drop-shadow(2px 4px 6px black);
-                        transition: transform .4s;
+                        transition: .05s;
 
                         &:hover {
                             transform: scale(1.1);
+                            transition: 0.1s;
+                        }
+                        &:active {
+                            transform: scale(0.9);
+                            transition: 0.05s ease-in-out 0.01s;
                         }
                     }
                 }
@@ -247,21 +256,3 @@
         }
     }
 }
-
-// .cover_image {
-//     width: 40%;
-//     display: flex;
-//     padding: 30px;
-//     justify-content: right;
-
-//     img {
-//         height: fit-content;
-//         width: 100%;
-//         position: relative;
-//         border-radius: 10px;
-//         transition: transform .4s;
-
-//         &:hover {
-//             transform: scale(1.04);
-//         }
-//     }
