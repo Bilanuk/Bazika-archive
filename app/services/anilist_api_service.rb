@@ -189,3 +189,5 @@ class AnilistApiService
     end
   end
 end
+# document.getElementsByClassName('alert-body')[0].innerHTML = "<%= j render 'shared/alert' %>";
+# document.querySelector('#recommendations').innerHTML = "<%= j render('search/recommendations', recommendations: @recommendations)%>"

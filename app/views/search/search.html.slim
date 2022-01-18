@@ -1,26 +1,27 @@
-.search_box
-    p.filter Filters:
-    = simple_form_for :search, url: search_path, method: :get do |f|
-        .form-inputs
-            = f.input :query, require: true, label: false, placeholder: 'Name of a title', class: 'search-input'
-            = f.submit 'Search', class: 'submit-button'
-- if @response&.empty?
-    - if @response.blank?
-        h5.search-results No titles found.
-- if @response.present?
-        - @response.each do |title|
-                = link_to show_path(id: title['id']), action: :get do
-                    .title
-                        - if title['type'].present?
-                            h6.type = title['type']
-                        .image_cover
-                            img src=title['coverImage']['extraLarge']
-                        .description
-                            h4 = title['title']['english'].present? ? title['title']['english'].truncate(50) : title['title']['native'].present? ? title['title']['native'] : 'No title aviable'
-                            - if title['genres'].present?
-                                - title['genres'].each do |genre|
-                                    p.d-inline-block.ml-2.mb-1.text-secondary = genre
-                                    
-                            p = title['description']&.gsub(/<br\s*\/?>|<i\s*\/?>|<\/i>/, '')
-        .task-paginator-wrapper.mb-3
-            = paginate @response, class: "task-paginator"
+.show_wrapper.mt-2.mb-2.pt-1.pb-1
+    .search_box
+        p.filter Filters:
+        = simple_form_for :search, url: search_path, method: :get do |f|
+            .form-inputs
+                = f.input :query, require: true, label: false, placeholder: 'Name of a title', class: 'search-input'
+                = f.submit 'Search', class: 'submit-button'
+    - if @response&.empty?
+        - if @response.blank?
+            h5.search-results No titles found.
+    - if @response.present?
+            - @response.each do |title|
+                    = link_to show_path(id: title['id']), action: :get do
+                        .title
+                            - if title['type'].present?
+                                h6.type = title['type']
+                            .image_cover
+                                img src=title['coverImage']['extraLarge']
+                            .description
+                                h4 = title['title']['english'].present? ? title['title']['english'].truncate(50) : title['title']['native'].present? ? title['title']['native'] : 'No title aviable'
+                                - if title['genres'].present?
+                                    - title['genres'].each do |genre|
+                                        p.d-inline-block.ml-2.mb-1 = genre
+                                        
+                                p = title['description']&.gsub(/<br\s*\/?>|<i\s*\/?>|<\/i>/, '')
+            .task-paginator-wrapper.mb-3
+                = paginate @response, class: "task-paginator"

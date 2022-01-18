@@ -1,4 +1,6 @@
-class TitlesController < ProfileController
+class TitlesController < AccessController
+    # skip_before_action :authenticate_user!, only: [:set_status]
+    
     def create_favourite
         title = find_title.presence
         is_favourite = is_favourite?
@@ -16,6 +18,8 @@ class TitlesController < ProfileController
     end
 
     def set_status
+        return redirect_to new_user_session_path unless current_user
+
         title = find_title.presence
 
         if title.present?

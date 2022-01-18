@@ -1,3 +1,5 @@
-- @users.each do |user|
-    = link_to show_user_path(id: user.id), action: :get do
-        h4.text-white = user.username + ' ' + user.email
+.show_wrapper.mt-2.mb-2.p-3
+    h3.mb-3 Users:
+    - @users.each do |user|
+        = link_to show_user_path(id: user.id), action: :get do
+            h4.text-white = user.username + ' ' + user.email

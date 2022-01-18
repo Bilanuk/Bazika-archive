@@ -1,9 +1,17 @@
 class SearchController < ApplicationController
     def show
-        @is_favourite = is_favourite? if current_user
-        @status = get_status
-        @response = information
-        @recommendations = Kaminari.paginate_array(information['recommendations']['edges']).page(params[:page]).per(5)
+        respond_to do |format|
+            format.html do
+                @is_favourite = is_favourite? if current_user
+                @status = get_status
+                @response = information
+                @recommendations = Kaminari.paginate_array(information['recommendations']['edges']).page(params[:page]).per(5)
+            end
+            
+            format.js do
+                @recommendations = Kaminari.paginate_array(information['recommendations']['edges']).page(params[:page]).per(5)
+            end
+        end
     end
 
     def search

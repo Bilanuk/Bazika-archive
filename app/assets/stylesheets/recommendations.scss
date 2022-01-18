@@ -1,0 +1,17 @@
+.recommendations_header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    .task-paginator-wrapper {
+        margin-right: 20px;
+    }
+
+    @media (max-width: 767px) {
+        flex-direction: column;
+        .task-paginator-wrapper {
+            margin-right: 0px;
+        }
+    }
+}

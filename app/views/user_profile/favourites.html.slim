@@ -1,19 +1,19 @@
-.search_box
+.show_wrapper.mt-2.mb-2.pt-1.pb-1
     h3.m-3 = 'Favourites:'
-- @titles.each do |title|
-            = link_to show_path(id: title.api_id), action: :get, data: { no_turbolink: true } do
-                .title
-                    - if title.title_type.present?
-                        h6.type = title.title_type
-                    .image_cover
-                        img src=title.coverImage
-                    .description
-                        h4 = title.name 
-                        - if title.genres.present?
-                            - title.genres.each do |genre|
-                                p.d-inline-block.ml-2.mb-1.text-secondary = genre
-                                    
-                        p = title.description&.gsub(/<br\s*\/?>|<i\s*\/?>|<\/i>/, '')
+    - @titles.each do |title|
+                = link_to show_path(id: title.api_id), action: :get, data: { no_turbolink: true } do
+                    .title
+                        - if title.title_type.present?
+                            h6.type = title.title_type
+                        .image_cover
+                            img src=title.coverImage
+                        .description
+                            h4 = title.name 
+                            - if title.genres.present?
+                                - title.genres.each do |genre|
+                                    p.d-inline-block.ml-2.mb-1 = genre
+                                        
+                            p = title.description&.gsub(/<br\s*\/?>|<i\s*\/?>|<\/i>/, '')
 
-.task-paginator-wrapper.mb-3
-            = paginate @titles, class: "task-paginator"
+    .task-paginator-wrapper.mb-3
+                = paginate @titles, class: "task-paginator"
