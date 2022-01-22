@@ -14,5 +14,5 @@
                                         p.d-inline-block.ml-2.mb-1 = genre
                                         
                                 p = title['description']&.gsub(/<br\s*\/?>|<i\s*\/?>|<\/i>/, '')
-    .task-paginator-wrapper.mb-3
+    .task-paginator-wrapper.only_next_prev.mb-3
         = paginate @titles, class: "task-paginator"

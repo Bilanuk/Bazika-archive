@@ -20,11 +20,21 @@ body {
 .no_bg {
   background: none !important;
 }
-.minimal {
+.only_numbers {
   .first,
   .prev,
   .next,
   .last {
     display: none;
+  }
+}
+.only_next_prev {
+  .last,
+  .page,
+  .gap {
+    display: none;
+  }
+  .current{
+    display: inline-block;
   }
 }
