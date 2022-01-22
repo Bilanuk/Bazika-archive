@@ -21,6 +21,7 @@ require('jquery-ui/ui/widgets/sortable')
 require('./favourites')
 require('./turbolink_fixes')
 require('./navbar')
+require('./paginations')
 
 Rails.start()
 Turbolinks.start()

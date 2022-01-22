@@ -1,6 +1,4 @@
-class ProfileController < ApplicationController
-    before_action :authenticate_user!
-
+class ProfileController < AccessController
     def favourites
         @titles = get_user.titles.where(favourite: true).order(updated_at: :desc).page(params[:page]).per(5)
     end

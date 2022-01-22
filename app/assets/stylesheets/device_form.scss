@@ -9,16 +9,17 @@
     width: 400px;
     padding: 25px 30px 10px 30px;
     border-radius: 1em;
-    background-color: $dark;
+    background-color: $transperent_darker;
     text-align: center;
     color: #fff;
+    backdrop-filter: blur(10px);
 
     input:-webkit-autofill {
-      -webkit-box-shadow: 0 0 0px 1000px $dark inset;
+      -webkit-box-shadow: 0 0 0px 50px $transperent_darker inset !important;
     }
 
     input:-webkit-autofill:focus {
-      -webkit-box-shadow: 0 0 0 50px $dark inset;
+      -webkit-box-shadow: 0 0 0 50px $transperent_darker inset !important;
       -webkit-text-fill-color: #ffffff;
     }
 
@@ -50,7 +51,7 @@
     .form-inputs input[type = "text"],
     .form-inputs input[type = "password"] {
       border: 0;
-      background: $dark;
+      background: $transperent_dark;
       display: block;
       margin: 8px auto;
       border: 1.5px solid #ffffff;

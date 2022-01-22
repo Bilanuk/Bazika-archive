@@ -55,25 +55,11 @@
                     api_id: params[:id], \
                     status: 'watched', \
                     }), remote: true, method: :post, id: "watched", class: "status_button"
-        
+
+/ = render  "player" 
+
 - if @recommendations.present?
-    .show_wrapper.mt-2.mb-2.pt-1.pb-1
-        - @recommendations.each do |title|
-                = link_to show_path(id: title['node']['mediaRecommendation']['id']), action: :get do
-                    .title
-                        - if title['node']['mediaRecommendation']['type'].present?
-                            h6.type = title['node']['mediaRecommendation']['type']
-                        .image_cover
-                            img src=title['node']['mediaRecommendation']['coverImage'].values[0]
-                        .description
-                            h4 = title['node']['mediaRecommendation']['title']['english'].present? ? title['node']['mediaRecommendation']['title']['english'].truncate(50) : title['node']['mediaRecommendation']['title']['native'].present? ? title['node']['mediaRecommendation']['title']['native'] : 'No title aviable'
-                            - if title['node']['mediaRecommendation']['genres'].present?
-                                - title['node']['mediaRecommendation']['genres'].each do |genre|
-                                    p.d-inline-block.ml-2.mb-1.text-secondary = genre
-                                            
-                            p = title['node']['mediaRecommendation']['description']&.gsub(/<br\s*\/?>|<i\s*\/?>|<\/i>/, '')
-        .task-paginator-wrapper.mb-3
-            = paginate @recommendations, class: "task-paginator"
+    = render partial: "recommendations", locals: {recommendations: @recommendations}    
 - if current_user
     javascript: 
         if ( #{@is_favourite} ) { 
@@ -85,6 +71,7 @@
         var status = '#{@status}';
         if (status !== "") {
             document.getElementById(status).style.backgroundColor = 'gray';
+            document.getElementById(status).classList.add('status_button_active');
         }
 
 

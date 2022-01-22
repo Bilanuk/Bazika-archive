@@ -7,6 +7,8 @@ Rails.application.configure do
   # it changes. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
+  config.action_controller.perform_caching = true
+  config.cache_store = :memory_store, { size: 1.megabytes }
 
   # Do not eager load code on boot.
   config.eager_load = false

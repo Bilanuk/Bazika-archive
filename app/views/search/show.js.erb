@@ -1,0 +1,14 @@
+document.getElementsByClassName('alert-body')[0].innerHTML = "<%= j render 'shared/alert' %>";
+
+$target = $('#recommendations');
+    $target.fadeOut(function() {
+        $target.replaceWith(function() {
+            return $("<%= j render('search/recommendations', recommendations: @recommendations)%>").hide().fadeIn();
+        });
+});
+
+$('#pagination_link').on('click', function() {
+    if($(this).hasClass('disabled'))
+      return;
+    $(this).addClass('disabled');
+});

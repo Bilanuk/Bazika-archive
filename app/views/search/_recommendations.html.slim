@@ -1,0 +1,21 @@
+#recommendations.show_wrapper.mt-2.mb-2.pt-1.pb-1
+    .recommendations_header
+        h2.m-3.mt-2 Recommendations:
+        .task-paginator-wrapper.only_numbers
+            = paginate recommendations, remote: true
+    - recommendations.each do |title|
+                    = link_to show_path(id: title['node']['mediaRecommendation']['id']), action: :get do
+                        .title.no_bg
+                            - if title['node']['mediaRecommendation']['type'].present?
+                                h6.type = title['node']['mediaRecommendation']['type']
+                            .image_cover
+                                img src=title['node']['mediaRecommendation']['coverImage'].values[1]
+                            .description
+                                h4 = title['node']['mediaRecommendation']['title']['english'].present? ? title['node']['mediaRecommendation']['title']['english'].truncate(50) : title['node']['mediaRecommendation']['title']['native'].present? ? title['node']['mediaRecommendation']['title']['native'] : 'No title aviable'
+                                - if title['node']['mediaRecommendation']['genres'].present?
+                                    - title['node']['mediaRecommendation']['genres'].each do |genre|
+                                        p.d-inline-block.ml-2.mb-1.text-white = genre
+                                                
+                                p = title['node']['mediaRecommendation']['description']&.gsub(/<br\s*\/?>|<i\s*\/?>|<\/i>/, '')&.truncate(200)
+    .task-paginator-wrapper.mb-2
+            = paginate recommendations, remote: true

@@ -1,8 +1,8 @@
-.search_box.d-flex.justify-content-between
-    div
-        h3.m-3 = @user.username
-    div.d-flex.justify-content-around.w-50
-        = link_to "Favourites(#{@arr[0]})", user_favourites_path(@user), class: 'text-light text-decoration-none fw-bold navbar_search_text'
-        = link_to "Watching(#{@arr[1]})", user_watching_path(@user), class: 'text-light text-decoration-none fw-bold navbar_search_text'
-        = link_to "Planning(#{@arr[2]})", user_planning_path(@user), class: 'text-light text-decoration-none fw-bold navbar_search_text'
-        = link_to "Watched(#{@arr[3]})", user_watched_path(@user), class: 'text-light text-decoration-none fw-bold navbar_search_text'
+    .show_wrapper.d-flex.justify-content-between.mt-2.mb-2.pt-1.pb-1
+        div
+            h3.m-3 = @user.username
+        div.d-flex.justify-content-around.w-50.align-items-center
+            = link_to "Favourites(#{@arr[0]})", user_favourites_path(@user), class: 'text-light text-decoration-none fw-bold navbar_search_text'
+            = link_to "Watching(#{@arr[1]})", user_watching_path(@user), class: 'text-light text-decoration-none fw-bold navbar_search_text'
+            = link_to "Planning(#{@arr[2]})", user_planning_path(@user), class: 'text-light text-decoration-none fw-bold navbar_search_text'
+            = link_to "Watched(#{@arr[3]})", user_watched_path(@user), class: 'text-light text-decoration-none fw-bold navbar_search_text'

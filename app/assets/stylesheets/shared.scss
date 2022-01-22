@@ -1,4 +1,10 @@
 @import "colors";
+
+body {
+  background: url(asset-path('backgrounds/lawn_forest.jpg')) no-repeat left center fixed;
+  // background: url(https://www.deltavcapital.com/wp-content/uploads/2014/07/forest-patrol.jpg) no-repeat left center fixed;
+}
+
 .ml-0 {
   margin-left: 0;
 }
@@ -10,4 +16,25 @@
 }
 .after_navbar {
   margin-top: 75px;
+}
+.no_bg {
+  background: none !important;
+}
+.only_numbers {
+  .first,
+  .prev,
+  .next,
+  .last {
+    display: none;
+  }
+}
+.only_next_prev {
+  .last,
+  .page,
+  .gap {
+    display: none;
+  }
+  .current{
+    display: inline-block;
+  }
 }
